@@ -89,7 +89,7 @@ TODO
 
 ## Destructors
 
-TODO: current idea is to have `Drop::drop` take a partially-borrowed `&own` reference, any members not specified to be partially-borrowed by the method signature will be dropped by the compiler
+TODO: current idea is to have `Drop::drop` take a partially-borrowed `&own` reference, any members not specified to be partially-borrowed by the method signature will be dropped by the compiler before `Drop::drop` is run
 <br>
 Also this allows you to avoid the hack where `ManuallyDrop` is put on members so they could be moved out of in the destructor, instead the `&own` references allows you to move out of members
 <br>
