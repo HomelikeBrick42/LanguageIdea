@@ -25,6 +25,10 @@ NOTE: "shared" and "unique" are whether other writable references can exist poin
 <br>
 (maybe "noalias" would be a better name for "unique"? though that is equally as unclear and only slightly better because of LLVM connotations and being a more esoteric name so that new people dont assume that "unique" means unique to other immutable references aswell)
 
+### Syntax
+
+The syntax for references has not yet been decided
+
 ### Comparisons to rust
 
 - A `&T` from rust which does not contain an `UnsafeCell` is readable, non-writable, and unique
