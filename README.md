@@ -81,3 +81,11 @@ This isnt really interrior mutability, but its similar enough to rust that I'll 
 - A version of `RefCell` will also exist to be able to get a unique reference from a shared mutable reference, at the cost of runtime checks to make sure multiple unique references are not created
 
 NOTE: `UnsafeCell` is not needed as a special magic language-builtin anymore, since the uniqueness can just be known by the `Cell`/`RefCell` and the compiler already expects mutability when doing aliasing optimisations on `Cell`/`RefCell` because you need a mutable shared reference to get a shared reference
+
+## Partial Borrowing
+
+TODO
+
+## Destructors
+
+TODO: current idea is to have `Drop::drop` take a partially-borrowed &own reference, any members not specified to be partially-borrowed by the method signature will be dropped by the compiler
