@@ -90,6 +90,8 @@ TODO
 
 TODO: current idea is to have `Drop::drop` take a partially-borrowed &own reference, any members not specified to be partially-borrowed by the method signature will be dropped by the compiler
 <br>
-Also this allows you to avoid the hack where `ManuallyDrop` is put of members so they could be moved out of in the destructor, instead `&own` references to partially-borrowed members can just be leaked
+Also this allows you to avoid the hack where `ManuallyDrop` is put of members so they could be moved out of in the destructor, instead the `&own` references allows you to move out of members
+<br>
+In fact, `ManuallyDrop` could be implemented entirely within user code just by leaking an `&own` reference to its only member therefore causing its drop glue to never be run
 <br>
 (NOTE: this also could fix weird "dropck eyepatch" stuff in current rust)
