@@ -70,10 +70,6 @@ But disallowing shared mutability entirely just for these few cases is overly re
 
 This isnt really interrior mutability, but its similar enough to rust that I'll call it that
 
-Some variant of rusts `Cell` and `RefCell` will exist in this language
-
-TODO: explain why they are needed, also mention that an `UnsafeCell` language feature isnt needed
-
 - A version of rusts `Cell` will exist to be able to mutate the state of an `enum` when you only have a shared mutable reference (because you need a unique mutable reference to reassign it)
   <br>
   This will be at the cost of not being able to reference anything inside the `Cell`, just like rust, because it could cause reference invalidation and then use-after-frees
