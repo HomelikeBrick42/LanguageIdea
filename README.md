@@ -69,7 +69,7 @@ But disallowing shared mutability entirely just for these few cases is overly re
 - It allows stuff like rusts `dyn FnOnce()` to exist and not be magic, since you can just pass `&own dyn FnOnce()` to the `call_once` method
 - It allows moving out of slices (like with `IntoIterator` or possibly indexing/pattern matching?)
 - It allows bump allocators to return `&own` references to values that are allocated, making the value's `Drop` impl get called when the `&own` goes out of scope and making sure the reference lifetime is tied to the allocator
-- `Vec::drain` could return a type just containing a `&own [T]` member and some info to move the elements back when its dropped, it wouldnt even have to drop the `T`s manually because it holds a `&own [T]`, and the destructor wouldnt interfere with using the `&own [T]` either because it partially-borrow everything but that member
+- `Vec::drain` could return a type just containing a `&own [T]` member and some info to move the elements back when its dropped, it wouldnt even have to drop the `T`s manually because it holds a `&own [T]`, and the destructor wouldnt interfere with using the `&own [T]` either because it partially-borrows everything but that member
 
 ## "Interrior mutability" types
 
