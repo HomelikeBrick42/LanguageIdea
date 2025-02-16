@@ -89,3 +89,5 @@ TODO
 ## Destructors
 
 TODO: current idea is to have `Drop::drop` take a partially-borrowed &own reference, any members not specified to be partially-borrowed by the method signature will be dropped by the compiler
+<br>
+(NOTE: this also could fix weird "dropck eyepatch" stuff in current rust)
