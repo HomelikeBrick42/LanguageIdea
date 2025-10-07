@@ -101,6 +101,8 @@ In fact, `ManuallyDrop` could be implemented entirely within user code just by l
 <br>
 (NOTE: this also could fix weird "dropck eyepatch" stuff in current rust)
 
+TODO: `Drop` shouldnt be a trait in the first place, its useless in rust because you cant call `Drop::drop`, and using it as a trait bound is entirely useless
+
 ## Const arguments
 
 Parameters can be annotated with `const` to make them require a compile-time value, const generics do not exist
