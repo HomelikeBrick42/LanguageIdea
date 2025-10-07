@@ -1,6 +1,6 @@
 # Language Idea
 
-This language is mostly similar to rust (currently) but with a few changes
+This language is mostly similar to rust (currently) but with alot of changes
 
 ## Reference types
 
@@ -96,3 +96,49 @@ Also this allows you to avoid the hack where `ManuallyDrop` is put on members so
 In fact, `ManuallyDrop` could be implemented entirely within user code just by leaking an `&own` reference to its only member therefore causing its drop glue to never be run
 <br>
 (NOTE: this also could fix weird "dropck eyepatch" stuff in current rust)
+
+## Const arguments
+
+Parameters can be annotated with `const` to make them require a compile-time value, const generics do not exist
+
+## Implicit arguments
+
+Every function will have implicit arguments in `[]`, and then explicit arguments after in `()`
+
+If explicit arguments arent specified, the compiler will try to infer what it should be from context, and if that fails, it will then attempt to pick some default value for it
+
+TODO: figure out the syntax for making something the default value in a scope
+
+TODO: figure out the syntax for making all functions in a scope take a certain implicit argument
+
+## First class types
+
+There will be no "generics", only `const` arguments with the `Type` type, and then those const arguments can be used as the type of variables, other parameters, etc
+
+## Const
+
+There will be no `const fn` in this language, unlike rust, everything will be able to be run at compile time
+
+`main` will take a special `IO` value as a runtime parameter (which will have zero size), and then things like FFI, printing stuff to the console, etc, will require this `IO` value
+
+The `IO` value will not be able to be constructed manually, so the only way to get one is though `main`'s argument, and so you cannot obtain one at compile time
+
+This avoids all the coloring issues that rust has with `const fn`s and `const trait`s
+
+As an example, if there is some `Option::map` method, it doesnt need to care whether the function its passed does side effects, it just wants to call the function
+<br>
+If the caller wants to cause side effects, they can just pass a closure that captures the special `IO` value, and `Option::map` never needs to know
+
+## Extra `IO` ideas
+
+There could be "restrictions" on `IO`, like a special struct for printing that just stores `IO`, and then you can pass that more restricted type to functions that want to print stuff, without giving them full access to do other side effects
+
+There could be other structs too for only writing to a specific directory, etc, which you could pass to mods/plugins that applications
+
+## Traits
+
+There are no traits. "Trait bounds" will be replaced by just taking a struct with some functions in it as an (implicit/explicit) argument
+
+Trait implementations will just be a value of the custom vtable struct, which means the user can also override any trait implementation that they want by just passing a diffferent vtable value when calling a function
+
+Implicit arguments and custom default values will be useful for automatically passing the correct vtable to methods
