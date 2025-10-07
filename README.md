@@ -27,7 +27,7 @@ NOTE: "shared" and "unique" are whether other writable references can exist poin
 
 TODO: should non-readable references exist?
 
-TODO: should there be another out-parameter reference which cant be dropped, only written to? It could be useful for constructing "pinned" objects
+TODO: should there be another out-parameter reference which cant be dropped, only written to? It could be useful for constructing "pinned" objects in-place
 
 ### Syntax
 
